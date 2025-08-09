@@ -82,6 +82,15 @@ h1{
     color : #EAF6FF;
 }
 
+#msg-text-scroll{
+    font-size : 3.5vmin;
+    color : #ffa400;
+    font-weight: bold;
+    background-color: #232528;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
 .hide{
     display: none;
 }

@@ -20,6 +20,10 @@ const resetGame = () => {
     turnO = true;
     enableBoxes();
     msgContainer.classList.add("hide");
+    let scrollPara = document.querySelector("#msg-text-scroll");
+    if(scrollPara){
+        scrollPara.remove();
+    }
 }
 
 boxes.forEach((box) => {
@@ -27,10 +31,11 @@ boxes.forEach((box) => {
         console.log("btn was clicked");
         if(turnO){
             box.innerText = "O";
+            box.style.color = "#00ff00";
             turnO = false;
         }else{
             box.innerText = "X";
-            box.style.color = "#ffa400";
+            box.style.color = "#009FFD";
             turnO = true;
         }
         box.disabled = true;
@@ -54,7 +59,11 @@ const enableBoxes = () => {
 const showWinner = (winner) => {
     msgText.innerText = `Congratulations, Winner is " ${winner} "` ;
     msgContainer.classList.remove("hide");
-}
+    let scrollPara = document.createElement("p");
+    scrollPara.innerText = "Scroll down to view game.";
+    scrollPara.setAttribute("id", "msg-text-scroll");
+    msgContainer.appendChild(scrollPara);
+    }
 
 const checkWinner = () => {
     for(let pattern of winPattern){
@@ -69,7 +78,17 @@ const checkWinner = () => {
                 showWinner(pos1Val);
             }
         }
-
+    }
+    let isDraw = true;
+    for(let box of boxes){
+        if(box.innerText === ""){
+            isDraw = false;
+            break;
+        }
+    }
+    if(isDraw){
+        showWinner("No one, it's a Draw");
+        disableBoxes();
     }
 }
 
